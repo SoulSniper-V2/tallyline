@@ -55,5 +55,5 @@ This repository's Tallyline application, fixtures, tests, docs, and interface we
 - [x] Human-in-the-loop and no-irreversible-action boundary
 - [ ] Public YouTube/Vimeo demo link — add only after recording and verifying visibility
 - [ ] AWS Builder ID — complete on the submitter account
-- [x] Final public repository URL and commit — `https://github.com/SoulSniper-V2/tallyline` (`63506da`)
+- [x] Final public repository URL and implementation commit — `https://github.com/SoulSniper-V2/tallyline` (`cde09bd`)
 - [ ] Optional builder.aws post with “Agents for Humans” in the title — only if actually published
