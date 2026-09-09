@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="710" viewBox="0 0 1280 710" role="img" aria-labelledby="title desc">
+  <title id="title">Tallyline evidence-first grant closeout architecture</title>
+  <desc id="desc">A flow from four synthetic source files through deterministic evidence reconciliation and the Strands agent seam into a claim ledger, human decision queue, and Markdown export.</desc>
+  <rect width="1280" height="710" fill="#d9ded6"/>
+  <g font-family="Helvetica Neue, Arial, sans-serif" fill="#13211f">
+    <text x="60" y="65" font-size="14" letter-spacing="3" fill="#a7442a">TALLYLINE / ARCHITECTURE</text>
+    <text x="60" y="112" font-size="38" font-weight="600" letter-spacing="-2">Evidence travels. Authority stays human.</text>
+    <text x="60" y="145" font-family="monospace" font-size="13" fill="#62706a">Local deterministic demo · optional Strands coordinator seam · no external side effects</text>
+  </g>
+  <g stroke="#13211f" stroke-width="1" fill="#f4f0df">
+    <rect x="60" y="205" width="235" height="270"/>
+    <rect x="350" y="205" width="275" height="270"/>
+    <rect x="680" y="205" width="250" height="270"/>
+    <rect x="985" y="175" width="235" height="330"/>
+  </g>
+  <g font-family="monospace" font-size="11" fill="#a7442a" letter-spacing="1">
+    <text x="84" y="239">01 / SOURCE DRAWER</text>
+    <text x="374" y="239">02 / EVIDENCE PASS</text>
+    <text x="704" y="239">03 / CLAIM LEDGER</text>
+    <text x="1009" y="209">04 / HUMAN HANDOFF</text>
+  </g>
+  <g font-family="Helvetica Neue, Arial, sans-serif" fill="#13211f">
+    <text x="84" y="285" font-size="16" font-weight="600">Synthetic inputs</text>
+    <text x="84" y="322" font-family="monospace" font-size="12">award_brief.json</text>
+    <text x="84" y="351" font-family="monospace" font-size="12">activity_log.csv</text>
+    <text x="84" y="380" font-family="monospace" font-size="12">finance.csv</text>
+    <text x="84" y="409" font-family="monospace" font-size="12">story_notes.json</text>
+    <text x="84" y="450" font-size="12" fill="#62706a">Targets · events · spend</text>
+    <text x="84" y="466" font-size="12" fill="#62706a">narrative · consent flags</text>
+
+    <text x="374" y="285" font-size="16" font-weight="600">Bounded coordinator</text>
+    <text x="374" y="320" font-family="monospace" font-size="12">FastAPI → service.py</text>
+    <text x="374" y="350" font-family="monospace" font-size="12">dedupe + sum + compare</text>
+    <text x="374" y="380" font-family="monospace" font-size="12">Strands Agent seam</text>
+    <text x="374" y="410" font-family="monospace" font-size="12">typed tools only</text>
+    <text x="374" y="449" font-size="12" fill="#62706a">No submit · no payment</text>
+    <text x="374" y="466" font-size="12" fill="#62706a">no source mutation</text>
+
+    <text x="704" y="285" font-size="16" font-weight="600">Traceable claims</text>
+    <text x="704" y="322" font-family="monospace" font-size="12">supported</text>
+    <text x="704" y="350" font-family="monospace" font-size="12">needs-review</text>
+    <text x="704" y="378" font-family="monospace" font-size="12">blocked by consent</text>
+    <text x="704" y="427" font-size="12" fill="#62706a">Every value carries a</text>
+    <text x="704" y="444" font-size="12" fill="#62706a">source and status.</text>
+
+    <text x="1009" y="255" font-size="16" font-weight="600">Operator chooses</text>
+    <text x="1009" y="291" font-family="monospace" font-size="12">finance explanation</text>
+    <text x="1009" y="320" font-family="monospace" font-size="12">story consent</text>
+    <text x="1009" y="349" font-family="monospace" font-size="12">period coverage</text>
+    <text x="1009" y="399" font-size="12" fill="#62706a">Approved decisions</text>
+    <text x="1009" y="416" font-size="12" fill="#62706a">unlock the draft; they</text>
+    <text x="1009" y="433" font-size="12" fill="#62706a">never submit it.</text>
+    <text x="1009" y="480" font-family="monospace" font-size="12" fill="#a7442a">→ Markdown + evidence index</text>
+  </g>
+  <g stroke="#db6c3b" stroke-width="2" fill="none">
+    <path d="M295 340 H350"/><path d="M625 340 H680"/><path d="M930 340 H985"/>
+  </g>
+  <g fill="#db6c3b">
+    <path d="M342 333 l9 7 -9 7z"/><path d="M672 333 l9 7 -9 7z"/><path d="M977 333 l9 7 -9 7z"/>
+  </g>
+  <g font-family="monospace" font-size="11" fill="#62706a">
+    <text x="60" y="610">Runtime boundary</text>
+    <text x="60" y="635">The browser can run, inspect, approve, reset, and export. The fixture pass is repeatable.</text>
+    <text x="60" y="660">A production deployment may add Bedrock / AgentCore session hosting after credentials, permissions, and live probes are verified.</text>
+  </g>
+</svg>

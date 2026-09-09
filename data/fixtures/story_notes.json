@@ -1,0 +1,14 @@
+[
+  {
+    "id": "note-01",
+    "text": "A resident told the team the kit made the first hot week feel manageable.",
+    "consent": true,
+    "identifying_details_removed": true
+  },
+  {
+    "id": "note-02",
+    "text": "A resident described a difficult night during the heat wave and asked for follow-up.",
+    "consent": false,
+    "identifying_details_removed": false
+  }
+]

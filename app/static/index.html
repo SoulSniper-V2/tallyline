@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d9ded6" />
+    <title>Tallyline — evidence-first closeout</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="wordmark" href="/" aria-label="Tallyline home">
+          <span class="wordmark-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span>TALLYLINE</span>
+        </a>
+        <div class="topbar-center"><span class="pulse-dot" aria-hidden="true"></span> GOOD NEIGHBOR / WORKSPACE 01</div>
+        <div class="topbar-right"><span class="saved-state" id="savedState">LOCAL / SYNTHETIC</span><span class="topbar-separator">·</span><span id="runId">RUN —</span></div>
+      </header>
+
+      <main class="main-grid">
+        <section class="case-intro" aria-labelledby="pageTitle">
+          <div class="section-kicker"><span>01</span><span>CASE FILE</span><span class="kicker-rule"></span></div>
+          <h1 id="pageTitle">Make the<br /><span>evidence</span><br /><em>travel.</em></h1>
+          <p class="intro-copy">A closeout draft should carry its sources with it. Tallyline reconciles the small files behind a grant, then leaves the last calls to the person who knows the work.</p>
+
+          <div class="case-slip">
+            <div class="slip-top"><span>AWARD BRIEF / GN-26-014</span><span class="slip-stamp">SYNTHETIC</span></div>
+            <h2>Neighborhood<br />Cooling Kits</h2>
+            <div class="slip-meta"><span><b>FUNDER</b>North River Community Fund</span><span><b>PERIOD</b>May 1 – Aug 31, 2026</span><span><b>AWARD</b>$18,000</span></div>
+            <div class="slip-footer"><span>5 REPORTING LINES</span><span>4 SOURCE FILES</span><span>NO SUBMISSION</span></div>
+          </div>
+
+          <div class="action-row">
+            <button class="button button-primary" id="runButton" type="button"><span class="button-label">Run reconciliation</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+            <button class="text-button" id="resetButton" type="button">Reset case</button>
+          </div>
+          <p class="action-note" id="actionNote">The local pass totals and cross-checks the fixture files. No model call or external write.</p>
+
+          <div class="source-drawer">
+            <div class="source-heading"><span>SOURCE DRAWER</span><span>04 FILES</span></div>
+            <div class="source-row"><span class="file-type">JSON</span><span>award_brief.json</span><span class="source-role">requirements</span></div>
+            <div class="source-row"><span class="file-type">CSV</span><span>activity_log.csv</span><span class="source-role">outputs</span></div>
+            <div class="source-row"><span class="file-type">CSV</span><span>finance.csv</span><span class="source-role">spend</span></div>
+            <div class="source-row"><span class="file-type">JSON</span><span>story_notes.json</span><span class="source-role">voice + consent</span></div>
+          </div>
+        </section>
+
+        <section class="workbench" aria-label="Tallyline workbench">
+          <div class="workbench-head">
+            <div>
+              <div class="section-kicker muted"><span>RECONCILIATION ROUTE</span><span class="kicker-rule"></span><span id="providerLabel">STRANDS / LOCAL</span></div>
+              <h2>From loose files to a <i>defensible</i> draft.</h2>
+            </div>
+            <div class="run-status" id="runStatus" aria-live="polite"><span class="status-mark ready"></span><span id="runStatusText">Ready to trace</span></div>
+          </div>
+
+          <div class="route" aria-label="Reconciliation stages">
+            <div class="route-track" aria-hidden="true"><span class="route-fill" id="routeFill"></span></div>
+            <div class="route-stop complete"><span class="route-node">01</span><span class="route-name">Read</span><span class="route-caption">requirements</span></div>
+            <div class="route-stop complete"><span class="route-node">02</span><span class="route-name">Reconcile</span><span class="route-caption">source totals</span></div>
+            <div class="route-stop active"><span class="route-node">03</span><span class="route-name">Trace</span><span class="route-caption">each claim</span></div>
+            <div class="route-stop"><span class="route-node">04</span><span class="route-name">Hand off</span><span class="route-caption">human calls</span></div>
+          </div>
+
+          <div class="ledger-panel panel-rule">
+            <div class="panel-heading">
+              <div><span class="panel-index">A / 01</span><h3>Claim ledger</h3></div>
+              <div class="legend" aria-label="Claim status legend"><span><i class="legend-dot supported"></i>supported</span><span><i class="legend-dot review"></i>needs review</span><span><i class="legend-dot blocked"></i>blocked</span></div>
+            </div>
+            <div class="ledger-table-wrap">
+              <table class="ledger-table">
+                <thead><tr><th scope="col">REPORTING LINE</th><th scope="col">VALUE</th><th scope="col">STATUS</th><th scope="col">SOURCE / NOTE</th><th scope="col"><span class="sr-only">Open claim detail</span></th></tr></thead>
+                <tbody id="ledgerBody"><tr><td colspan="5" class="loading-cell">Press “Run reconciliation” to open the ledger.</td></tr></tbody>
+              </table>
+            </div>
+            <div class="ledger-foot"><span id="ledgerSummary">No claims loaded</span><span class="ledger-foot-note">Click a line to inspect its evidence.</span></div>
+          </div>
+
+          <div class="lower-grid">
+            <section class="decision-panel panel-rule" aria-labelledby="decisionHeading">
+              <div class="panel-heading compact"><div><span class="panel-index">B / 02</span><h3 id="decisionHeading">Human decision queue</h3></div><span class="queue-count" id="queueCount">—</span></div>
+              <p class="panel-lede">Three calls stay with you because the source files cannot make them honestly.</p>
+              <div class="decision-list" id="decisionList"><div class="empty-decision">The queue appears after the evidence pass.</div></div>
+            </section>
+
+            <section class="report-panel panel-rule" aria-labelledby="reportHeading">
+              <div class="panel-heading compact"><div><span class="panel-index">C / 03</span><h3 id="reportHeading">Draft packet</h3></div><a class="export-link" id="exportLink" href="/api/export">Export .md ↗</a></div>
+              <div class="report-sheet" id="reportSheet">
+                <div class="report-empty"><span class="report-glyph">∷</span><p>Run the pass to see a report made of claims, not vibes.</p></div>
+              </div>
+            </section>
+          </div>
+          <p class="workbench-foot"><span class="tiny-lock" aria-hidden="true">⌁</span> TALLYLINE PREPARES THE PACKET. A HUMAN OWNS THE SUBMISSION.</p>
+        </section>
+      </main>
+      <footer class="app-footer"><span>TALLYLINE / EVIDENCE-FIRST CLOSEOUT</span><span>MIT / HACKATHON BUILD / 2026</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

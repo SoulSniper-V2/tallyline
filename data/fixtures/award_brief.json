@@ -1,0 +1,19 @@
+{
+  "id": "GN-26-014",
+  "title": "Neighborhood Cooling Kits",
+  "funder": "North River Community Fund",
+  "period": "May 1 – Aug 31, 2026",
+  "amount": 18000,
+  "targets": {
+    "households": 120,
+    "kits": 120,
+    "workshops": 3
+  },
+  "reporting_requirements": [
+    {"id": "R1", "label": "Households reached", "kind": "metric", "target": 120},
+    {"id": "R2", "label": "Cooling kits distributed", "kind": "metric", "target": 120},
+    {"id": "R3", "label": "Cooling workshops", "kind": "metric", "target": 3},
+    {"id": "R4", "label": "Use of funds", "kind": "finance", "target": 18000},
+    {"id": "R5", "label": "Community voice", "kind": "story", "needs_consent": true}
+  ]
+}

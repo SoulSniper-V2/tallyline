@@ -1,0 +1,6 @@
+event_id,date,site,households,kits,workshops,note
+EV-001,2026-05-18,Maple Court,32,32,1,Launch distribution and heat-safety briefing
+EV-002,2026-06-06,Juniper Library,28,28,1,Library pickup day
+EV-003,2026-07-11,East Rail Senior Center,33,32,0,Home delivery route
+EV-004,2026-08-22,Harbor Church,35,32,1,Final distribution and cooling plan clinic
+EV-004,2026-08-22,Harbor Church,35,32,1,Duplicate export row retained for reconciliation test
