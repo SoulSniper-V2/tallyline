@@ -53,7 +53,7 @@ This repository's Tallyline application, fixtures, tests, docs, and interface we
 - [x] Strands Agents SDK dependency and typed agent seam
 - [x] Live model-backed Strands run verified with Gemini; the readout is advisory and tool-grounded
 - [x] Human-in-the-loop and no-irreversible-action boundary
-- [ ] Public YouTube/Vimeo demo link — add only after recording and verifying visibility
+- [x] Public Vimeo demo link — `https://vimeo.com/1225124530` (public watch page verified)
 - [ ] AWS Builder ID — complete on the submitter account
 - [x] Final public repository URL and implementation commit — `https://github.com/SoulSniper-V2/tallyline` (`cde09bd`)
 - [ ] Optional builder.aws post with “Agents for Humans” in the title — only if actually published

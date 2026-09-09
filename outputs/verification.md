@@ -15,10 +15,11 @@ Checked September 8, 2026 from the project root.
 - `docs/architecture.svg` and the JSON fixtures parse successfully.
 - Visual review captures: `.impeccable/review/desktop.png` and `.impeccable/review/mobile.png`.
 - `outputs/tallyline-demo.mp4` was generated from the running FastAPI UI with a scripted Playwright walkthrough, a visible live Gemini/Strands readout, narration, H.264/AAC encoding, and a verified duration of 227.28 seconds at 1440×900. Full decode completed without errors; the closing frame includes the model/safety handoff card.
+- The video was uploaded to Vimeo, optimized successfully, set to Public / All audiences, disclosed as AI-generated audio only, and verified at `https://vimeo.com/1225124530` in the public watch view.
 - The repository was pushed to `https://github.com/SoulSniper-V2/tallyline` and independently verified public through GitHub metadata.
 
 ## Not claimed
 
 - No AWS account, Bedrock model invocation, AgentCore deployment, or hosted app URL was verified in this workspace. The Bedrock/AgentCore path remains implemented and documented, not claimed as deployed.
-- No public YouTube/Vimeo video URL, AWS Builder ID, or builder.aws post was created. Those checklist items remain deliberately open in `docs/submission.md`; the local MP4 is ready for upload.
+- No AWS Builder ID or builder.aws post was created. Those checklist items remain deliberately open in `docs/submission.md`.
 - Fixture outputs and beneficiary notes are synthetic and should not be presented as measured real-world impact.

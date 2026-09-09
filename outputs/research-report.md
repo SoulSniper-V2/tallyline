@@ -41,7 +41,7 @@ The account-specific X scan used the available authenticated headless workflow w
 
 ## Submission-state verification
 
-1. The local MP4 is recorded, H.264/AAC decoded successfully, 3:47 long at 1440×900, and includes a live Gemini/Strands readout. Public Vimeo upload and visibility verification remain open.
-2. The public repository, license, setup, fixtures, tests, and diagram were verified; the latest live-model/docs changes still need their final push.
+1. The local MP4 is recorded, H.264/AAC decoded successfully, 3:47 long at 1440×900, and includes a live Gemini/Strands readout. It is published at [Vimeo](https://vimeo.com/1225124530), and the public watch page was verified.
+2. The public repository, license, setup, fixtures, tests, and diagram were verified; the live-model/docs changes are pushed to `main`.
 3. If pursuing AWS hosting, deploy with least-privilege tool permissions, verify the live endpoint and logs, and update claims only after the probe succeeds.
 4. Add AWS Builder ID and any optional builder.aws post only after they are actually complete.
