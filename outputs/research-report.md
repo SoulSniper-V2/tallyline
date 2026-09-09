@@ -21,7 +21,7 @@ The official page is the authority for rules and criteria. Its gallery was not p
 
 ## Technical fit
 
-The [Strands Python quickstart](https://strandsagents.com/docs/user-guide/quickstart/python/) documents the `strands-agents` package, `Agent`, and `@tool` flow. Strands' [multi-agent documentation](https://strandsagents.com/docs/user-guide/concepts/multi-agent-systems/) describes agents-as-tools and Graph/Swarm/Workflow patterns. The build uses a bounded coordinator seam and typed tools while keeping deterministic reconciliation in ordinary Python, which makes the local behavior directly inspectable.
+The [Strands Python quickstart](https://strandsagents.com/docs/user-guide/quickstart/python/) documents the `strands-agents` package, `Agent`, and `@tool` flow. Strands' [multi-agent documentation](https://strandsagents.com/docs/user-guide/concepts/multi-agent-systems/) describes agents-as-tools and Graph/Swarm/Workflow patterns. The build uses a bounded coordinator seam and typed tools while keeping deterministic reconciliation in ordinary Python, which makes the local behavior directly inspectable. A live `GeminiModel` probe through the same Strands coordinator completed with both tools invoked; the recorded demo includes that advisory readout. The repository also retains a provider-configured Bedrock path.
 
 The [AWS Bedrock AgentCore runtime guide](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/agents-tools-runtime.html) describes a framework-agnostic runtime for agents, including Strands, with session and long-running operation support. The Strands [cloud deployment lesson](https://strandsagents.com/docs/learning/deploying-agents-to-the-cloud/) provides the relevant deployment path. This repository does not claim that a live Bedrock/AgentCore deployment, AWS credentialed invocation, or hosted endpoint was completed; those require a separate deployment and live probe.
 
@@ -39,9 +39,9 @@ The role mix and rubric suggest five useful proof obligations: measurable determ
 
 The account-specific X scan used the available authenticated headless workflow without exposing session material or performing any social actions. Official AWS/Devpost posts confirmed live hackathon promotion, the three-track/$40k framing, and the recurring language around agents handling repetitive paperwork/scheduling. Strands-related chatter showed interest in multi-agent and AgentCore evaluation. Searches for foodbank and Good Neighbor examples did not supply stronger evidence than the indexed project scan. Individual judge searches surfaced public professional content, but not reliable scoring preferences. These are discovery signals only; the official Devpost page remains the source of truth.
 
-## Open verification before submission
+## Submission-state verification
 
-1. Record and publish the under-five-minute demo, then verify it in an incognito browser.
-2. Push the public repository and verify the exact commit, license, setup, fixtures, tests, and diagram are reachable.
+1. The local MP4 is recorded, H.264/AAC decoded successfully, 3:47 long at 1440×900, and includes a live Gemini/Strands readout. Public Vimeo upload and visibility verification remain open.
+2. The public repository, license, setup, fixtures, tests, and diagram were verified; the latest live-model/docs changes still need their final push.
 3. If pursuing AWS hosting, deploy with least-privilege tool permissions, verify the live endpoint and logs, and update claims only after the probe succeeds.
 4. Add AWS Builder ID and any optional builder.aws post only after they are actually complete.

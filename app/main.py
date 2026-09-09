@@ -8,7 +8,7 @@ from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 
 from .models import DecisionApproval
-from .agent import invoke_live_agent
+from .agent import invoke_live_agent, provider_label
 from .service import export_markdown, run_case
 
 
@@ -39,9 +39,9 @@ def run():
     if os.getenv("TALLYLINE_AGENT_MODE", "local").lower() != "live":
         return result
     try:
-        result.agent_mode = "live"
         result.agent_note = invoke_live_agent(result.summary.award_id, _approved)
-        result.provider = "Strands • live Bedrock"
+        result.agent_mode = "live"
+        result.provider = provider_label()
         return result
     except Exception as error:
         raise HTTPException(status_code=503, detail=f"Live Strands run unavailable: {error}") from error

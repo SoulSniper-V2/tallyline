@@ -4,7 +4,7 @@
 
 Tallyline turns an award brief, activity log, finance export, and story notes into a funder-ready closeout draft whose claims stay attached to their evidence. It shows the operator what is supported, what needs review, and what is blocked by consent or missing context. The operator resolves the final decisions; Tallyline does not submit, email, pay, or move money.
 
-This is a synthetic local demo for the Agents for Humans Hackathon. No beneficiary data is real.
+This is a synthetic demo for the Agents for Humans Hackathon. No beneficiary data is real. The default path is local and deterministic; the demonstrated live path uses Gemini through Strands with the same bounded tools.
 
 ## Run it
 
@@ -34,9 +34,18 @@ uv run pytest -q
 
 ## Agent architecture
 
-The default local path is deterministic so a reviewer can inspect the exact behavior without an AWS account or model key. `app/agent.py` contains a real Strands `Agent`, two bounded typed tools, and an opt-in live Bedrock invocation path. Set `TALLYLINE_AGENT_MODE=live`, `AWS_REGION`, and `TALLYLINE_MODEL_ID` with valid AWS credentials to make `/api/run` perform the live agent pass; the app returns an error rather than labeling a failed call as live. `app/service.py` owns the evidence ledger and report assembly. Bedrock AgentCore is a compatible hosting path, but it is not required and is not claimed as deployed here.
+The default local path is deterministic so a reviewer can inspect the exact behavior without a provider account or model key. `app/agent.py` contains a real Strands `Agent` and two bounded typed tools. Set `TALLYLINE_AGENT_MODE=live` to make `/api/run` perform a live agent pass; the app returns an error rather than labeling a failed call as live. This submission's recorded demo and direct probe use `GeminiModel` with `gemini-2.5-flash` through Strands. The same coordinator can use Amazon Bedrock when AWS credentials, region, and model access are supplied. `app/service.py` owns the evidence ledger and report assembly; a live model only receives the typed evidence operations and returns an advisory readout. Bedrock AgentCore is a compatible hosting path, but it is not claimed as deployed here.
 
-Example live probe (use a model enabled in your AWS region; model calls may incur cost):
+Example Gemini live run (model calls may incur cost):
+
+```bash
+export GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+TALLYLINE_AGENT_MODE=live TALLYLINE_MODEL_PROVIDER=gemini \
+  uv run uvicorn app.main:app --host 127.0.0.1 --port 8000
+curl -X POST http://127.0.0.1:8000/api/run
+```
+
+Example Bedrock live run (use a model enabled in your AWS region; model calls may incur cost):
 
 ```bash
 TALLYLINE_AGENT_MODE=live AWS_REGION=YOUR_REGION TALLYLINE_MODEL_ID=YOUR_MODEL_ID \

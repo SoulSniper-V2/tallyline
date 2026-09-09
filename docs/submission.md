@@ -10,13 +10,13 @@ Small community organizations are often asked to prove impact with the least str
 
 The key artifact is the claim ledger. It makes supported, needs-review, and blocked claims visible. A duplicate activity row is removed before totaling. A budget variance stays in the human queue until someone explains it. A beneficiary note without publication consent never enters the narrative. The operator can resolve the final calls and export a Markdown report plus evidence index, but Tallyline has no submission, email, payment, or money-moving tool.
 
-The repository includes a runnable FastAPI app, synthetic fixtures, tests, an architecture diagram, and an MIT license. The local demo is deterministic and reviewable. `app/agent.py` contains the Strands Agents SDK coordinator seam with bounded tools; a future Bedrock AgentCore deployment is an explicit extension point, not represented as a completed deployment in this submission.
+The repository includes a runnable FastAPI app, synthetic fixtures, tests, an architecture diagram, and an MIT license. The evidence pass is deterministic and reviewable, while the recorded demo and direct verification also run a real Gemini model through Strands. `app/agent.py` exposes two bounded typed tools: the model asks for the evidence ledger and draft packet, then returns a short advisory readout. A Bedrock/AgentCore deployment is an explicit compatible extension point, not represented as a completed AWS deployment in this submission.
 
 ## Five-minute demo script
 
 **0:00–0:35 — Scene.** Open the app. Say: “This is a synthetic grant closeout for a small community organization. The files are not clean enough to trust a polished paragraph.” Point to the four-source drawer and the award slip.
 
-**0:35–1:20 — Run.** Click “Run reconciliation.” Let the route fill from Read to Reconcile to Trace. Explain that the local Strands-labelled pass is deterministic for this demo, so the exact decision behavior is inspectable.
+**0:35–1:20 — Run.** Click “Run reconciliation.” Let the route fill from Read to Reconcile to Trace. Explain that this capture makes a real Gemini call through Strands, while the evidence ledger is still deterministic and authoritative. The two typed tools are visible in the resulting model readout.
 
 **1:20–2:20 — Claim ledger.** Point out 128 households, 124 kits, and 3 workshops. Expand the household line and show that the repeated `event_id` was removed before totaling. Expand spend: $15,940 of $18,000 is known, so the $2,060 difference is not silently treated as spent.
 
@@ -24,7 +24,7 @@ The repository includes a runnable FastAPI app, synthetic fixtures, tests, an ar
 
 **3:25–4:10 — Draft packet.** Show the report updating as decisions resolve. Point to the status line and the note that unsupported/non-consented narrative is excluded. Click “Export .md” and open the generated evidence index.
 
-**4:10–4:45 — Architecture and safety.** Show the diagram or repository. Explain FastAPI → deterministic service → typed Strands tools → claim ledger → human handoff. Mention that Bedrock AgentCore is a documented production path, not a claim about this local run.
+**4:10–4:45 — Architecture and safety.** Show the diagram or repository. Explain FastAPI → deterministic service → typed Strands tools → claim ledger → human handoff. This demo uses Gemini through Strands; Bedrock/AgentCore is the configured AWS path when credentials and model access are supplied, not a claim about this local run.
 
 **4:45–5:00 — Close.** “Tallyline does not write the story for the operator. It makes the evidence travel with the story, and keeps the last call human.”
 
@@ -38,6 +38,8 @@ These are design choices informed by the published rubric and judge roles; they 
 - **Creativity/originality:** the claim ledger is the product, not prose generation. Consent and unsupported evidence are first-class states.
 - **Presentation:** the demo uses one synthetic case with a visible duplicate, variance, and consent boundary so the agent's judgment can be inspected in under five minutes.
 
+The recorded run is 3:47 at 1440×900. It shows the live model readout, the authoritative ledger, the human decision queue, and the final Markdown handoff.
+
 ## Competition disclosure
 
 This repository's Tallyline application, fixtures, tests, docs, and interface were created as a new hackathon build during the competition's stated coding window. No pre-existing application code is being presented as new work. The general problem framing and the creator's prior skills/knowledge predate this build; those are not represented as prior software or prior competition submission. All demo data is synthetic and authored for this repository.
@@ -49,8 +51,9 @@ This repository's Tallyline application, fixtures, tests, docs, and interface we
 - [x] README with run instructions
 - [x] Architecture diagram
 - [x] Strands Agents SDK dependency and typed agent seam
+- [x] Live model-backed Strands run verified with Gemini; the readout is advisory and tool-grounded
 - [x] Human-in-the-loop and no-irreversible-action boundary
 - [ ] Public YouTube/Vimeo demo link — add only after recording and verifying visibility
 - [ ] AWS Builder ID — complete on the submitter account
-- [x] Final public repository URL and commit — `https://github.com/SoulSniper-V2/tallyline` (`551f00c`)
+- [x] Final public repository URL and commit — `https://github.com/SoulSniper-V2/tallyline` (`63506da`)
 - [ ] Optional builder.aws post with “Agents for Humans” in the title — only if actually published

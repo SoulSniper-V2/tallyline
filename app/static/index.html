@@ -15,7 +15,7 @@
           <span>TALLYLINE</span>
         </a>
         <div class="topbar-center"><span class="pulse-dot" aria-hidden="true"></span> GOOD NEIGHBOR / WORKSPACE 01</div>
-        <div class="topbar-right"><span class="saved-state" id="savedState">LOCAL / SYNTHETIC</span><span class="topbar-separator">·</span><span id="runId">RUN —</span></div>
+        <div class="topbar-right"><span class="saved-state" id="savedState">READY / SYNTHETIC</span><span class="topbar-separator">·</span><span id="runId">RUN —</span></div>
       </header>
 
       <main class="main-grid">
@@ -35,7 +35,7 @@
             <button class="button button-primary" id="runButton" type="button"><span class="button-label">Run reconciliation</span><span class="button-arrow" aria-hidden="true">↗</span></button>
             <button class="text-button" id="resetButton" type="button">Reset case</button>
           </div>
-          <p class="action-note" id="actionNote">The local pass totals and cross-checks the fixture files. No model call or external write.</p>
+          <p class="action-note" id="actionNote">Trace the evidence route. The source ledger stays authoritative; no external submission is available here.</p>
 
           <div class="source-drawer">
             <div class="source-heading"><span>SOURCE DRAWER</span><span>04 FILES</span></div>
@@ -49,7 +49,7 @@
         <section class="workbench" aria-label="Tallyline workbench">
           <div class="workbench-head">
             <div>
-              <div class="section-kicker muted"><span>RECONCILIATION ROUTE</span><span class="kicker-rule"></span><span id="providerLabel">STRANDS / LOCAL</span></div>
+              <div class="section-kicker muted"><span>RECONCILIATION ROUTE</span><span class="kicker-rule"></span><span id="providerLabel">STRANDS / COORDINATOR</span></div>
               <h2>From loose files to a <i>defensible</i> draft.</h2>
             </div>
             <div class="run-status" id="runStatus" aria-live="polite"><span class="status-mark ready"></span><span id="runStatusText">Ready to trace</span></div>
@@ -76,6 +76,15 @@
             </div>
             <div class="ledger-foot"><span id="ledgerSummary">No claims loaded</span><span class="ledger-foot-note">Click a line to inspect its evidence.</span></div>
           </div>
+
+          <aside class="agent-readout panel-rule" id="agentReadout" aria-live="polite" hidden>
+            <div class="agent-readout-top">
+              <div><span class="panel-index">MODEL / 04</span><h3>Agent readout</h3></div>
+              <span class="agent-badge">LIVE · ADVISORY</span>
+            </div>
+            <p class="agent-readout-copy" id="agentNote"></p>
+            <p class="agent-readout-foot">The model summarizes the typed-tool trace. The evidence ledger remains authoritative.</p>
+          </aside>
 
           <div class="lower-grid">
             <section class="decision-panel panel-rule" aria-labelledby="decisionHeading">

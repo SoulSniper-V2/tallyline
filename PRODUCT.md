@@ -51,7 +51,7 @@ Synthetic award: Neighborhood Cooling Kits, $18,000, with targets for 120 househ
 
 - Python 3.12, FastAPI, and a small static browser UI.
 - A provider-neutral domain service that runs deterministically offline for reviewability.
-- A Strands Agents SDK adapter with a root `Agent`, typed tools, and named specialist agents; the adapter is optional at runtime so the demo remains runnable without AWS credentials or a model key.
+- A Strands Agents SDK adapter with a root `Agent` and two typed tools; the adapter is optional at runtime so the deterministic demo remains runnable without provider credentials, while the submitted capture uses a live Gemini model through the same seam.
 - Optional production path documented for Bedrock/AgentCore, with session state and tool permissions kept explicit.
 - JSON APIs for run, approve, reset, and export so the behavior can be directly tested.
 

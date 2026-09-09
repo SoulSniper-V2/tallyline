@@ -1,9 +1,10 @@
-"""The Strands seam and the offline coordinator used by the demo.
+"""The Strands seam and the evidence coordinator used by the demo.
 
-The product intentionally keeps the deterministic evidence pass separate from
-model generation. This makes the local demo reviewable and means the same
-typed tools can later be hosted behind Bedrock AgentCore without giving a
-model authority to submit a report or move money.
+The evidence pass remains deterministic and authoritative, while a live
+Strands model can inspect that pass through bounded typed tools and return a
+short operator-facing readout. This gives the demo a real model-backed path
+without giving a model authority to invent claims, submit a report, or move
+money.
 """
 
 from __future__ import annotations
@@ -57,24 +58,50 @@ def draft_supported_report(case_id: str, approved_decisions: str = "none") -> st
     return export_markdown(result) + f"\n\nAgent context: approved decisions = {approved_decisions}."
 
 
+def _configured_model() -> Any | None:
+    """Build the selected live model without ever reading a key into app state."""
+
+    provider = os.getenv("TALLYLINE_MODEL_PROVIDER", "auto").lower()
+    if provider not in {"auto", "gemini", "bedrock"}:
+        raise RuntimeError("TALLYLINE_MODEL_PROVIDER must be auto, gemini, or bedrock.")
+
+    gemini_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+    if provider == "gemini" or (provider == "auto" and gemini_key):
+        if not gemini_key:
+            raise RuntimeError("Gemini live mode needs GEMINI_API_KEY or GOOGLE_API_KEY.")
+        from strands.models.gemini import GeminiModel
+
+        return GeminiModel(
+            client_args={"api_key": gemini_key},
+            model_id=os.getenv("TALLYLINE_MODEL_ID", "gemini-2.5-flash"),
+            params={
+                "temperature": 0.2,
+                "max_output_tokens": 1024,
+                "top_p": 0.9,
+            },
+        )
+
+    model_id = os.getenv("TALLYLINE_MODEL_ID")
+    if not model_id:
+        return None
+    from strands.models import BedrockModel
+
+    model_config: dict[str, str] = {"model_id": model_id}
+    if os.getenv("AWS_REGION"):
+        model_config["region_name"] = os.environ["AWS_REGION"]
+    return BedrockModel(**model_config)
+
+
 def build_strands_agent() -> Any | None:
     """Build the real Strands coordinator when the SDK is importable.
 
-    No model call happens here. The optional provider is visible in the UI so
-    reviewers can distinguish the local deterministic path from a live model.
+    Construction is side-effect free. The model is invoked only by the
+    explicit live route.
     """
 
     if not STRANDS_AVAILABLE or Agent is None:
         return None
-    model = None
-    model_id = os.getenv("TALLYLINE_MODEL_ID")
-    if model_id:
-        from strands.models import BedrockModel
-
-        model_config: dict[str, str] = {"model_id": model_id}
-        if os.getenv("AWS_REGION"):
-            model_config["region_name"] = os.environ["AWS_REGION"]
-        model = BedrockModel(**model_config)
+    model = _configured_model()
     return Agent(
         model=model,
         name="Tallyline Coordinator",
@@ -88,15 +115,20 @@ def build_strands_agent() -> Any | None:
 
 
 def provider_label() -> str:
-    return "Strands • local deterministic pass"
+    if os.getenv("TALLYLINE_AGENT_MODE", "local").lower() != "live":
+        return "Strands • offline evidence pass"
+    provider = os.getenv("TALLYLINE_MODEL_PROVIDER", "auto").lower()
+    if provider == "auto" and (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
+        provider = "gemini"
+    return f"Strands • live {provider}"
 
 
 def invoke_live_agent(case_id: str, approved_decisions: dict[str, str] | None = None) -> str:
-    """Run the live Strands coordinator through the configured Bedrock model.
+    """Run the live Strands coordinator through the configured model.
 
-    This is intentionally opt-in because it requires AWS credentials and may
-    incur model charges. A successful return is the only point at which the
-    application labels a run as live.
+    This is intentionally opt-in because it requires provider credentials and
+    may incur model charges. A successful return is the only point at which
+    the application labels a run as live.
     """
 
     agent = build_strands_agent()
@@ -104,6 +136,6 @@ def invoke_live_agent(case_id: str, approved_decisions: dict[str, str] | None = 
         raise RuntimeError("The Strands SDK is not available in this environment.")
     decisions = ", ".join(f"{key}: {value}" for key, value in (approved_decisions or {}).items()) or "none"
     response = agent(
-        f"""Review synthetic grant closeout case {case_id}. You must use the reconcile_evidence tool and then the draft_supported_report tool. Summarize in under 100 words: the supported totals, any claim that needs human review, and the consent boundary. Never invent evidence, submit anything, or move money. Current approved decisions: {decisions}."""
+        f"""Review synthetic grant closeout case {case_id}. You must use the reconcile_evidence tool and then the draft_supported_report tool. Summarize in under 80 words for an operator: the supported totals, any claim that needs human review, and the consent boundary. Use only tool-returned evidence. Never invent a number, submit anything, or move money. Current approved decisions: {decisions}."""
     )
     return str(response).strip()

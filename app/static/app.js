@@ -72,19 +72,33 @@ function renderReport(result) {
   $("#reportSheet").innerHTML = `<div class="report-meta"><span>GN-26-014<strong>Closeout draft</strong></span><span>STATUS<strong>${escapeHtml(statusLine)}</strong></span></div><h4>Evidence-backed results</h4><ul>${bullets}</ul><p class="report-note">This draft excludes unsupported or non-consented narrative. Sources remain indexed in the exported packet.</p>`;
 }
 
+function renderAgentReadout(result) {
+  const panel = $("#agentReadout");
+  const note = String(result.agent_note || "").trim();
+  if (result.agent_mode !== "live" || !note) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+  $("#agentNote").innerHTML = escapeHtml(note).replace(/\n/g, "<br />");
+}
+
 function renderResult(result) {
   state.result = result;
   const summary = result.summary;
   $("#runId").textContent = result.run_id.toUpperCase();
   $("#providerLabel").textContent = result.provider.toUpperCase();
   $("#ledgerSummary").textContent = `${summary.claims} claims · ${summary.supported} supported · ${summary.needs_review} needs review · ${summary.blocked} blocked`;
-  $("#savedState").textContent = "LOCAL / SYNTHETIC";
+  $("#savedState").textContent = result.agent_mode === "live" ? "LIVE / SYNTHETIC" : "LOCAL / SYNTHETIC";
   $("#routeFill").style.transform = "scaleX(1)";
   renderLedger(result.claims);
   renderDecisions(result.decisions);
   renderReport(result);
+  renderAgentReadout(result);
   setRunStatus("complete", "Trace complete");
-  $("#actionNote").textContent = "Evidence is indexed. Resolve the queue before you export the packet.";
+  $("#actionNote").textContent = result.agent_mode === "live"
+    ? "Live model readout received. Typed tools and the evidence ledger remain authoritative."
+    : "Evidence is indexed. Resolve the queue before you export the packet.";
 }
 
 async function runCase({ reset = false } = {}) {
@@ -93,7 +107,7 @@ async function runCase({ reset = false } = {}) {
   const button = $("#runButton");
   button.disabled = true;
   $(".button-label").textContent = "Following evidence…";
-  $("#savedState").textContent = "RUNNING / LOCAL";
+  $("#savedState").textContent = "RUNNING / TRACE";
   setRunStatus("running", "Tracing source files");
   $("#routeFill").style.width = "24%";
   await new Promise((resolve) => window.setTimeout(resolve, reset ? 180 : 620));
@@ -130,6 +144,7 @@ async function approveDecision(decisionId, button) {
 $("#runButton").addEventListener("click", () => runCase());
 $("#resetButton").addEventListener("click", () => runCase({ reset: true }));
 
-// The first viewport is useful immediately: load the synthetic case, then leave
-// the explicit button available for a second pass during a demo.
-runCase();
+// The first viewport is useful immediately. A manual query is reserved for
+// the recorded live-model walkthrough so the explicit action remains visible
+// before the provider call starts.
+if (!new URLSearchParams(window.location.search).has("manual")) runCase();
